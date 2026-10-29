@@ -4,6 +4,17 @@
 
 ![tech](https://img.shields.io/badge/FastAPI-SQLite-0aa?logo=fastapi) ![tech](https://img.shields.io/badge/React-Recharts-7bd?logo=react) ![tech](https://img.shields.io/badge/LLM-GLM--4.6-8b5cf6)
 
+## 界面预览
+
+<p align="center">
+  <img src="screenshots/home.png" alt="StarRadar 首页" width="48%">
+  <img src="screenshots/fresh.png" alt="StarRadar 新秀榜" width="48%">
+</p>
+
+<p align="center">
+  <img src="screenshots/detail.png" alt="StarRadar 项目详情" width="72%">
+</p>
+
 ## 它能告诉你什么
 
 - **增速榜**:按近 24 小时 / 7 天 / 28 天的新增 Star 排序 —— 比总量榜更早发现趋势。
