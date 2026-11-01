@@ -1,0 +1,211 @@
+C:\Users\32413\.zcode\workspace\draft-912da3cc-9d9f-4233-be18-7735ed70d6e4\star-radar\backend\app\main.py:27: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("startup")
+C:\Users\32413\.zcode\workspace\draft-912da3cc-9d9f-4233-be18-7735ed70d6e4\star-radar\backend\app\main.py:34: DeprecationWarning: 
+        on_event is deprecated, use lifespan event handlers instead.
+
+        Read more about it in the
+        [FastAPI docs for Lifespan Events](https://fastapi.tiangolo.com/advanced/events/).
+        
+  @app.on_event("shutdown")
+INFO:     Started server process [58304]
+INFO:     Waiting for application startup.
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+INFO:     127.0.0.1:59264 - "GET /api/repos/Gathin23/cleanyourtv HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62927 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62927 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51163 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56907 - "GET /api/subs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63091 - "GET /api/watch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56907 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60616 - "GET /api/tracks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60748 - "GET /api/tracks/view?label=Agent%20%E6%A1%86%E6%9E%B6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61365 - "GET /api/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58684 - "GET /api/board?board=velocity&window=7d&lang=&q=&ai_only=false&track_id=0&sub_id=0&limit=60 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58684 - "GET /sw.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59931 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59931 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55189 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55189 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53572 - "GET /api/subs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63570 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59305 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59305 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56620 - "GET /api/board?board=sub&window=7d&lang=&q=&ai_only=false&track_id=0&sub_id=1&limit=60 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51257 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51257 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56695 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53599 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53599 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61469 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52877 - "GET /api/watch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58543 - "GET /api/subs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62175 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63024 - "GET /api/tracks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62281 - "GET /api/watch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61469 - "GET /api/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52877 - "GET /api/board?board=velocity&window=7d&lang=&q=&ai_only=false&track_id=0&sub_id=0&limit=60 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52877 - "GET /sw.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52877 - "GET /api/tracks/view?label=Agent%20%E6%A1%86%E6%9E%B6 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50815 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50815 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55150 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51330 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51330 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57607 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51256 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65280 - "GET /api/subs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63799 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60541 - "GET /api/watch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50060 - "GET /api/tracks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60778 - "GET /api/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51256 - "GET /api/board?board=velocity&window=7d&lang=&q=&ai_only=false&track_id=0&sub_id=0&limit=60 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57471 - "GET /sw.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59168 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59168 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58200 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58200 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54564 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54575 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54575 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65472 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52432 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54079 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54079 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64922 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59143 - "GET /api/subs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53521 - "GET /api/watch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58193 - "GET /api/tracks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49368 - "GET /api/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55720 - "GET /api/board?board=velocity&window=7d&lang=&q=&ai_only=false&track_id=0&sub_id=0&limit=60 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55720 - "GET /sw.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57662 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57662 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58903 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58903 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60578 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57106 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64465 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64465 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63519 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64792 - "GET /api/subs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58089 - "GET /api/watch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59345 - "GET /api/tracks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53976 - "GET /api/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59310 - "GET /api/board?board=velocity&window=7d&lang=&q=&ai_only=false&track_id=0&sub_id=0&limit=60 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53364 - "GET /sw.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50862 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64673 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54297 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54321 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54321 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61960 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56794 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56798 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56798 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50923 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50957 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50957 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53341 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60842 - "GET /api/watch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50595 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50619 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50619 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57818 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64955 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64956 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65482 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52206 - "GET /api/watch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62765 - "GET /api/subs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53819 - "GET /api/tracks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64916 - "GET /api/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55182 - "GET /api/board?board=velocity&window=7d&lang=&q=&ai_only=false&track_id=0&sub_id=0&limit=60 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55182 - "GET /sw.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65524 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65524 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54961 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54978 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54979 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56658 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56175 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56176 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49843 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53991 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53992 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60676 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59435 - "GET /api/watch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51883 - "GET /api/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54888 - "GET /api/tracks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64503 - "GET /api/board?board=velocity&window=7d&lang=&q=&ai_only=false&track_id=0&sub_id=0&limit=60 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50643 - "GET /api/subs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50643 - "GET /sw.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53093 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53094 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51465 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51530 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51530 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:59412 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58992 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58993 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49675 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56354 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56355 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49697 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49698 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61335 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49676 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49676 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50779 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50780 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58895 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60423 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60423 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:53891 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55456 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58333 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60430 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60430 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51689 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52840 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:52840 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50656 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:50656 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65008 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49693 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49693 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57340 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57340 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64022 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51780 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51780 - "GET /assets/index-CqqM2bNa.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64733 - "GET /assets/index-BrI8iLvS.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51780 - "GET /sw.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51780 - "GET /assets/space-grotesk-latin-wght-normal-BhU9QXUp.woff2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:56391 - "GET /api/subs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61062 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62036 - "GET /api/watch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64672 - "GET /api/tracks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:51780 - "GET /api/board?board=sub&window=7d&lang=&q=&ai_only=false&track_id=0&sub_id=1&limit=60 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64733 - "GET /api/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64672 - "GET /assets/jetbrains-mono-latin-wght-normal-B9CIFXIH.woff2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61222 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61222 - "GET /v1/models HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55712 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55712 - "GET /assets/index-CqqM2bNa.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60239 - "GET /assets/index-BrI8iLvS.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:60239 - "GET /sw.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60239 - "GET /assets/space-grotesk-latin-wght-normal-BhU9QXUp.woff2 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:63801 - "GET /api/stats HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54330 - "GET /api/subs HTTP/1.1" 200 OK
+INFO:     127.0.0.1:54852 - "GET /api/watch HTTP/1.1" 200 OK
+INFO:     127.0.0.1:55712 - "GET /api/board?board=sub&window=7d&lang=&q=&ai_only=false&track_id=0&sub_id=1&limit=60 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60239 - "GET /api/notifications?since=0 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63216 - "GET /api/tracks HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60239 - "GET /assets/jetbrains-mono-latin-wght-normal-B9CIFXIH.woff2 HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57479 - "GET /health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57480 - "GET /v1/models HTTP/1.1" 200 OK

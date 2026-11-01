@@ -54,7 +54,6 @@ export default function TrackPage({ label, onBack, onOpen, watched, onWatch }: P
 
       <div className="track-hero">
         <div>
-          <div className="hero-kicker">TRACK · 赛道观察</div>
           <h1 className="hero-title" style={{ fontSize: 34 }}>
             {track.label}
           </h1>
@@ -62,7 +61,7 @@ export default function TrackPage({ label, onBack, onOpen, watched, onWatch }: P
             {track.summary || "—"}
           </p>
           <span className="section-sub" style={{ fontFamily: "var(--font-mono)" }}>
-            {track.size} 个项目 · 热度 {(track.heat * 100).toFixed(0)} · 聚类方式 {track.method === "llm-embed" ? "语义聚类" : "主题词典"}
+            TRACK · {track.size} 个项目 · 热度 {(track.heat * 100).toFixed(0)} · 聚类方式 {track.method === "llm-embed" ? "语义聚类" : "主题词典"}
           </span>
         </div>
       </div>
@@ -86,6 +85,7 @@ export default function TrackPage({ label, onBack, onOpen, watched, onWatch }: P
             rank={i + 1}
             board="track"
             window="7d"
+            stagger={false}
             watched={watched.has(r.gh_id)}
             onOpen={onOpen}
             onWatch={onWatch}

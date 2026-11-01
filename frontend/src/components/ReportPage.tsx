@@ -55,9 +55,6 @@ export default function ReportPage({ kind, onBack, notify }: Props) {
       </button>
 
       <div className="report-hero">
-        <div className="hero-kicker">
-          {kind === "daily" ? "DAILY DIGEST · 每日简报" : "WEEKLY REPORT · 每周报告"}
-        </div>
         <h1 className="hero-title" style={{ fontSize: 34 }}>
           {kind === "daily" ? "今日 GitHub" : "本周 GitHub"}
         </h1>

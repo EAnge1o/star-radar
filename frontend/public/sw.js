@@ -1,5 +1,6 @@
-/* StarRadar 最小 Service Worker:静态资源缓存优先,API 直连(离线兜底空响应)。 */
-const CACHE = "starradar-v2";
+/* StarRadar Service Worker:导航与 API 网络优先(更新不被旧缓存卡住),
+   其余同源静态资源缓存优先;仅离线时回落缓存。 */
+const CACHE = "starradar-v3";
 
 self.addEventListener("install", (e) => {
   self.skipWaiting();
@@ -30,15 +31,16 @@ self.addEventListener("fetch", (e) => {
     return;
   }
 
+  // 导航请求(index.html)与静态资源:网络优先,离线回落缓存
   e.respondWith(
-    caches.match(e.request).then(
-      (hit) =>
-        hit ||
-        fetch(e.request).then((res) => {
-          const copy = res.clone();
-          caches.open(CACHE).then((c) => c.put(e.request, copy)).catch(() => {});
-          return res;
-        })
-    )
+    fetch(e.request)
+      .then((res) => {
+        const copy = res.clone();
+        caches.open(CACHE).then((c) => c.put(e.request, copy)).catch(() => {});
+        return res;
+      })
+      .catch(() =>
+        caches.match(e.request).then((hit) => hit || Response.error())
+      )
   );
 });

@@ -8,7 +8,6 @@ export default function Hero({ stats }: { stats: Stats | null }) {
   return (
     <section className="hero wrap">
       <div>
-        <span className="hero-kicker">GITHUB TRENDING RADAR · 每日自动观测</span>
         <h1 className="hero-title">
           看见 GitHub 的
           <br />

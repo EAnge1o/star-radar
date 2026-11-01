@@ -10,6 +10,7 @@ interface Props {
   board: string;
   window: string;
   watched?: boolean;
+  stagger?: boolean;
   onOpen: (r: Repo) => void;
   onWatch?: (r: Repo) => void;
   cursor?: boolean;
@@ -20,7 +21,7 @@ function isNew(repo: Repo): boolean {
   return (Date.now() - new Date(repo.created_at).getTime()) / 86400000 <= 30;
 }
 
-export default function RepoRow({ repo, rank, board, window, watched, onOpen, onWatch, cursor }: Props) {
+export default function RepoRow({ repo, rank, board, window, watched, stagger = true, onOpen, onWatch, cursor }: Props) {
   const delta = window === "1d" ? repo.stars_1d : window === "28d" ? repo.stars_28d : repo.stars_7d;
   const est = repo.velocity_est === 1;
   const winLabel = window === "1d" ? "近24h" : window === "28d" ? "近28天" : "近7日";
@@ -30,9 +31,9 @@ export default function RepoRow({ repo, rank, board, window, watched, onOpen, on
     <motion.div
       className={`repo-row ${cursor ? "row-cursor" : ""}`}
       onClick={() => onOpen(repo)}
-      initial={{ opacity: 0, y: 12 }}
+      initial={stagger ? { opacity: 0, y: 12 } : false}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: Math.min(rank * 0.03, 0.5), duration: 0.35, ease: "easeOut" }}
+      transition={{ delay: stagger ? Math.min(rank * 0.03, 0.5) : 0, duration: 0.35, ease: "easeOut" }}
     >
       <div className="rank-wrap">
         <div className={`rank ${rank === 1 ? "r1" : rank === 2 ? "r2" : rank === 3 ? "r3" : ""}`}>

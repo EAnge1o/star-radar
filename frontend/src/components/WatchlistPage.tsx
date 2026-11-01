@@ -67,7 +67,7 @@ export default function WatchlistPage({ onOpen, onWatchChange, notify }: Props) 
       <div className="repo-list">
         {repos?.map((r, i) => (
           <div key={r.gh_id} style={{ display: "grid", gridTemplateColumns: "1fr auto", alignItems: "center", gap: 10 }}>
-            <RepoRow repo={r} rank={i + 1} board="watch" window="7d" watched onOpen={onOpen} />
+            <RepoRow repo={r} rank={i + 1} board="watch" window="7d" stagger={false} watched onOpen={onOpen} />
             <button className="icon-btn" title="取消关注" onClick={() => unwatch(r)}>
               <BellOff size={14} />
             </button>

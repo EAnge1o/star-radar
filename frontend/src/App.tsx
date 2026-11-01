@@ -41,6 +41,7 @@ export default function App() {
 
   const [data, setData] = useState<BoardResp | null>(null);
   const [loading, setLoading] = useState(true);
+  const [loadError, setLoadError] = useState(false);
   const [stats, setStats] = useState<Stats | null>(null);
   const [tracks, setTracks] = useState<Track[]>([]);
   const [subs, setSubs] = useState<Sub[]>([]);
@@ -97,8 +98,8 @@ export default function App() {
   const loadBoard = useCallback(() => {
     setLoading(true);
     api.board(query)
-      .then(setData)
-      .catch(() => notify("榜单加载失败,请确认后端已启动"))
+      .then((d) => { setData(d); setLoadError(false); })
+      .catch(() => { setLoadError(true); notify("榜单加载失败,请确认后端已启动"); })
       .finally(() => { setLoading(false); setCursor(-1); });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [board, win, lang, qDebounced, aiOnly, trackId, subId]);
@@ -372,14 +373,22 @@ export default function App() {
         <div className={`repo-list ${density === "compact" ? "compact" : ""}`}>
           {loading && Array.from({ length: 8 }).map((_, i) => <div key={i} className="skel" />)}
 
-          {!loading && data?.repos.length === 0 && (
+          {!loading && loadError && (
+            <div className="empty-state">
+              <div className="big">榜单加载失败</div>
+              <div>后端可能没有启动,或网络异常。</div>
+              <button className="btn ghost" style={{ marginTop: 14 }} onClick={loadBoard}>重试</button>
+            </div>
+          )}
+
+          {!loading && !loadError && data?.repos.length === 0 && (
             <div className="empty-state">
               <div className="big">{board === "cooling" ? "还没有降温的项目 —— 都很坚挺" : "没有匹配的项目"}</div>
               <div>换个筛选条件,或点击右上角刷新做一次新观测。</div>
             </div>
           )}
 
-          {!loading &&
+          {!loading && !loadError &&
             data?.repos.map((r, i) => (
               <RepoRow
                 key={r.gh_id}

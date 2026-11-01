@@ -11,7 +11,7 @@
   --line-soft: rgba(148, 163, 184, 0.09);
   --ink: #e9eefb;
   --sub: #97a2ba;
-  --faint: #5f6b85;
+  --faint: #7d89a4;
   --cyan: #22d3ee;
   --cyan-soft: rgba(34, 211, 238, 0.14);
   --violet: #a78bfa;
@@ -48,7 +48,7 @@ html[data-theme="light"] {
   --line-soft: rgba(15, 23, 42, 0.09);
   --ink: #101828;
   --sub: #47546b;
-  --faint: #8a94a8;
+  --faint: #5d6982;
   --cyan: #0e93b0;
   --cyan-soft: rgba(14, 147, 176, 0.12);
   --violet: #7c3aed;
@@ -192,7 +192,7 @@ a {
   background: linear-gradient(135deg, rgba(34, 211, 238, 0.18), rgba(167, 139, 250, 0.18));
   border: 1px solid rgba(34, 211, 238, 0.35);
   color: var(--cyan);
-  box-shadow: 0 0 18px rgba(34, 211, 238, 0.25);
+  box-shadow: 0 2px 10px rgba(34, 211, 238, 0.28);
 }
 
 .logo-name {
@@ -203,10 +203,7 @@ a {
 
 .logo-name em {
   font-style: normal;
-  background: var(--grad);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--cyan);
 }
 
 .logo-sub {
@@ -257,7 +254,7 @@ a {
 .icon-btn:hover {
   color: var(--cyan);
   border-color: rgba(34, 211, 238, 0.4);
-  box-shadow: 0 0 14px rgba(34, 211, 238, 0.18);
+  box-shadow: 0 2px 10px rgba(34, 211, 238, 0.2);
 }
 
 .icon-btn.spin svg {
@@ -274,20 +271,6 @@ a {
   align-items: center;
 }
 
-.hero-kicker {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 12px;
-  letter-spacing: 2.5px;
-  color: var(--cyan);
-  border: 1px solid rgba(34, 211, 238, 0.3);
-  background: var(--cyan-soft);
-  padding: 5px 12px;
-  border-radius: 999px;
-  margin-bottom: 18px;
-}
-
 .hero-title {
   font-size: clamp(34px, 4.6vw, 52px);
   line-height: 1.14;
@@ -297,10 +280,7 @@ a {
 }
 
 .hero-title .grad {
-  background: var(--grad);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--cyan);
 }
 
 .hero-desc {
@@ -321,7 +301,6 @@ a {
   border: 1px solid var(--line-soft);
   border-radius: 14px;
   padding: 14px 16px;
-  backdrop-filter: blur(8px);
   transition: all 0.2s ease;
 }
 
@@ -348,10 +327,7 @@ a {
 }
 
 .kpi-value.accent {
-  background: var(--grad);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
+  color: var(--cyan);
 }
 
 /* ---------------- 雷达动画 ---------------- */
@@ -532,7 +508,6 @@ a {
   display: flex;
   flex-direction: column;
   gap: 8px;
-  backdrop-filter: blur(8px);
 }
 
 .track-card:hover {
@@ -582,8 +557,7 @@ a {
   border-radius: 4px;
   background: var(--grad);
   transition: width 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-  box-shadow: 0 0 10px rgba(34, 211, 238, 0.5);
-}
+  }
 
 /* ---------------- 控制条 ---------------- */
 
@@ -749,13 +723,12 @@ a {
   padding: 14px 18px 13px 16px;
   cursor: pointer;
   transition: all 0.18s ease;
-  backdrop-filter: blur(8px);
 }
 
 .repo-row:hover {
   transform: translateY(-2px);
   border-color: rgba(34, 211, 238, 0.4);
-  box-shadow: 0 12px 34px rgba(2, 8, 22, 0.55), 0 0 22px rgba(34, 211, 238, 0.08);
+  box-shadow: 0 8px 22px rgba(2, 8, 22, 0.45);
 }
 
 .rank {
@@ -766,7 +739,7 @@ a {
   text-align: center;
 }
 
-.rank.r1 { color: var(--r1); text-shadow: 0 0 16px rgba(255, 209, 102, 0.45); }
+.rank.r1 { color: var(--r1); }
 .rank.r2 { color: var(--r2); }
 .rank.r3 { color: var(--r3); }
 
@@ -850,7 +823,6 @@ a {
 .repo-comment .spark-icon {
   color: var(--violet);
   flex: none;
-  filter: drop-shadow(0 0 5px rgba(167, 139, 250, 0.6));
 }
 
 .repo-comment .why {
@@ -925,8 +897,7 @@ a {
   font-size: 16.5px;
   font-weight: 700;
   color: var(--green);
-  text-shadow: 0 0 14px rgba(74, 222, 128, 0.3);
-}
+  }
 
 .delta-main.est {
   color: #86d99f;
@@ -1090,7 +1061,7 @@ a {
 }
 
 .detail-cta:hover {
-  box-shadow: 0 0 18px rgba(34, 211, 238, 0.3);
+  box-shadow: 0 4px 14px rgba(34, 211, 238, 0.22);
 }
 
 .comment-card {
@@ -1532,13 +1503,11 @@ a {
 .report-hero { margin: 8px 0 10px; }
 
 .report-intro {
-  font-size: 16px;
+  font-size: 16.5px;
+  font-weight: 500;
   line-height: 1.8;
   color: var(--ink);
   max-width: 720px;
-  border-left: 3px solid;
-  border-image: var(--grad) 1;
-  padding-left: 16px;
   margin: 6px 0 16px;
 }
 
@@ -1658,4 +1627,38 @@ a {
 @media (max-width: 980px) {
   .page { padding-top: calc(var(--nav-h) + 22px); }
   .field-row { flex-direction: column; }
+}
+
+/* ---- craft floor:焦点可达 / 减动效 / 原生面 ---- */
+
+a {
+  text-underline-offset: 3px;
+}
+
+input,
+textarea {
+  caret-color: var(--cyan);
+}
+
+:focus-visible {
+  outline: 2px solid var(--cyan);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+.repo-row:focus-visible {
+  outline-offset: -2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html {
+    scroll-behavior: auto;
+  }
 }
