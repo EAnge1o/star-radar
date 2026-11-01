@@ -1,72 +1,72 @@
 /* ============================================================
-   StarRadar 设计系统 —— 「活字排字房」The Composing Room
-   石板为地,铅字为数据,朱砂记要务,铜金记选中。
-   状态写在字模的框上:实线=实测,虚线=估算,删除=撤。
+   StarRadar 设计系统 —— 「午夜线网」Midnight Transit Diagram
+   珐琅蓝为地,瓷白为站名,线路各有其色,选中线路最亮。
+   状态写在字模的框上:实线=实测,虚线=估算,删除=停运。
    ============================================================ */
 
 :root {
-  --bg0: #15171b;
-  --bg1: #191c21;
-  --panel: #1c1f25;
-  --panel-strong: #22262d;
-  --line: rgba(232, 226, 213, 0.16);
-  --line-soft: rgba(232, 226, 213, 0.09);
-  --ink: #e8e2d5;
-  --sub: #b3aa99;
-  --faint: #8a8274;
-  --accent: #b98a44;
-  --accent-soft: rgba(185, 138, 68, 0.14);
-  --zhusha: #c9413c;
-  --zhusha-soft: rgba(201, 65, 60, 0.14);
-  --green: #7fa86b;
-  --up-soft: rgba(127, 168, 107, 0.12);
-  --down: #b0614e;
-  --down-soft: rgba(176, 97, 78, 0.12);
-  --r1: #b98a44;
-  --r2: #cfc6b4;
-  --r3: #b0614e;
-  --nav-bg: rgba(21, 23, 27, 0.92);
-  --controls-bg: rgba(21, 23, 27, 0.96);
-  --modal-bg: #1a1d22;
-  --toast-bg: #22262d;
-  --block: #101215;
-  --font-display: "Noto Serif SC", "Source Han Serif SC", "Source Han Serif CN",
-    "SimSun", serif;
-  --font-ui: -apple-system, "PingFang SC", "Microsoft YaHei", "Noto Sans SC",
-    sans-serif;
+  --bg0: #0f1930;
+  --bg1: #132042;
+  --panel: #16264a;
+  --panel-strong: #1b2f58;
+  --line: rgba(242, 240, 230, 0.18);
+  --line-soft: rgba(242, 240, 230, 0.09);
+  --ink: #f2f0e6;
+  --sub: #b8c4dd;
+  --faint: #8b9bc0;
+  --accent: #f0a832;
+  --accent-soft: rgba(240, 168, 50, 0.14);
+  --zhusha: #d13a3f;
+  --zhusha-soft: rgba(209, 58, 63, 0.16);
+  --green: #4fc47a;
+  --up-soft: rgba(79, 196, 122, 0.13);
+  --down: #e35d5d;
+  --down-soft: rgba(227, 93, 93, 0.12);
+  --r1: #f0c75e;
+  --r2: #e8e6df;
+  --r3: #d99a6c;
+  --nav-bg: rgba(15, 25, 48, 0.92);
+  --controls-bg: rgba(15, 25, 48, 0.96);
+  --modal-bg: #132042;
+  --toast-bg: #1b2f58;
+  --block: #0b1224;
+  --font-display: "Overpass Variable", -apple-system, "PingFang SC",
+    "Microsoft YaHei", "Noto Sans SC", sans-serif;
+  --font-ui: "Overpass Variable", -apple-system, "PingFang SC",
+    "Microsoft YaHei", "Noto Sans SC", sans-serif;
   --font-mono: "JetBrains Mono Variable", ui-monospace, SFMono-Regular, Consolas,
     monospace;
   --nav-h: 58px;
   --radius: 2px;
 }
 
-/* 纸上世界(明亮主题):印出来的那一张 */
+/* 白天的口袋地图(明亮主题) */
 html[data-theme="light"] {
-  --bg0: #ece6d9;
-  --bg1: #e5ded0;
-  --panel: #f4f0e7;
-  --panel-strong: #faf7f0;
-  --line: rgba(33, 29, 22, 0.2);
-  --line-soft: rgba(33, 29, 22, 0.11);
-  --ink: #211d16;
-  --sub: #4d463a;
-  --faint: #6b6254;
-  --accent: #7a5a28;
-  --accent-soft: rgba(122, 90, 40, 0.12);
+  --bg0: #edf1f8;
+  --bg1: #e3e9f4;
+  --panel: #f7f9fd;
+  --panel-strong: #ffffff;
+  --line: rgba(22, 33, 60, 0.18);
+  --line-soft: rgba(22, 33, 60, 0.1);
+  --ink: #16213c;
+  --sub: #3d4a66;
+  --faint: #566180;
+  --accent: #96600f;
+  --accent-soft: rgba(150, 96, 15, 0.12);
   --zhusha: #b23a35;
   --zhusha-soft: rgba(178, 58, 53, 0.1);
-  --green: #557a43;
-  --up-soft: rgba(85, 122, 67, 0.12);
-  --down: #a05541;
-  --down-soft: rgba(160, 85, 65, 0.1);
-  --r1: #8f6a32;
-  --r2: #4d463a;
-  --r3: #a05541;
-  --nav-bg: rgba(236, 230, 217, 0.94);
-  --controls-bg: rgba(236, 230, 217, 0.97);
-  --modal-bg: #f4f0e7;
-  --toast-bg: #faf7f0;
-  --block: #e2dccd;
+  --green: #2e8f52;
+  --up-soft: rgba(46, 143, 82, 0.12);
+  --down: #c03f3f;
+  --down-soft: rgba(192, 63, 63, 0.1);
+  --r1: #96600f;
+  --r2: #3d4a66;
+  --r3: #c03f3f;
+  --nav-bg: rgba(237, 241, 248, 0.94);
+  --controls-bg: rgba(237, 241, 248, 0.97);
+  --modal-bg: #f7f9fd;
+  --toast-bg: #ffffff;
+  --block: #dde4f0;
 }
 
 * {
@@ -94,13 +94,13 @@ body::before {
   position: fixed;
   inset: 0;
   z-index: -1;
-  background-image: radial-gradient(rgba(232, 226, 213, 0.05) 1px, transparent 1.2px);
+  background-image: radial-gradient(rgba(242, 240, 230, 0.055) 1px, transparent 1.2px);
   background-size: 22px 22px;
   pointer-events: none;
 }
 
 html[data-theme="light"] body::before {
-  background-image: radial-gradient(rgba(33, 29, 22, 0.07) 1px, transparent 1.2px);
+  background-image: radial-gradient(rgba(22, 33, 60, 0.06) 1px, transparent 1.2px);
 }
 
 ::selection {
@@ -337,7 +337,7 @@ h1, h2, h3 {
 }
 
 .lead-box::before {
-  content: "报眼";
+  content: "今日首发";
   position: absolute;
   top: -1px;
   right: -1px;
@@ -436,12 +436,26 @@ h1, h2, h3 {
 .track-card {
   background: var(--panel);
   border: 1px solid var(--line-soft);
-  padding: 13px 14px 11px;
+  padding: 12px 14px 11px;
   cursor: pointer;
-  transition: border-color 0.15s ease;
+  transition: border-color 0.15s ease, opacity 0.2s ease;
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 6px;
+  opacity: 0.8;
+}
+
+.track-card:hover {
+  opacity: 1;
+}
+
+.track-line {
+  line-height: 0;
+  margin-bottom: 2px;
+}
+
+.lead-num small {
+  color: var(--faint);
 }
 
 .track-card:hover {
@@ -678,8 +692,9 @@ h1, h2, h3 {
 }
 
 .rank {
-  font-family: var(--font-display);
-  font-size: 17px;
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  font-size: 16px;
   font-weight: 700;
   color: var(--faint);
   line-height: 1.2;

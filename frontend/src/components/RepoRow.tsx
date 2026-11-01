@@ -1,7 +1,7 @@
 import { ChevronRight, Flame, Snowflake, Sparkles, Star, TriangleAlert, Waves } from "lucide-react";
 import { motion } from "framer-motion";
 import type { Repo } from "../types";
-import { cnRank, fmtAge, fmtNum, langColor } from "../utils";
+import { fmtAge, fmtNum, langColor } from "../utils";
 import Sparkline from "./Sparkline";
 
 interface Props {
@@ -46,7 +46,7 @@ export default function RepoRow({ repo, rank, board, window, watched, stagger = 
     >
       <div className="rank-wrap">
         <div className={`rank ${rank === 1 ? "r1" : rank === 2 ? "r2" : rank === 3 ? "r3" : ""}`}>
-          {cnRank(rank)}
+          {rank}
         </div>
         {rankDelta != null && rankDelta !== 0 && (
           <div className={`rank-delta ${rankDelta > 0 ? "up" : "down"}`}>

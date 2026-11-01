@@ -7,8 +7,15 @@ export interface Route {
 
 export function parseHash(): Route {
   const h = window.location.hash.replace(/^#\/?/, "");
-  const [pathPart, queryPart] = h.split("?");
-  return { path: pathPart.replace(/\/$/, ""), query: new URLSearchParams(queryPart || "") };
+  const [rawPath, queryPart] = h.split("?");
+  // 浏览器可能把整段路径(含斜杠)编码成 %2F——先解码再匹配前缀
+  let path = rawPath || "";
+  try {
+    path = decodeURIComponent(path);
+  } catch {
+    /* 保留原样 */
+  }
+  return { path: path.replace(/\/$/, ""), query: new URLSearchParams(queryPart || "") };
 }
 
 export function useHashRoute(): Route {

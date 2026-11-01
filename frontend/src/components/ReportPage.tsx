@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { ArrowDownRight, ArrowLeft, ArrowUpRight, Copy, Send, Snowflake, Users } from "lucide-react";
 import { api } from "../api";
 import type { Report, ReportSection } from "../types";
-import { fmtNum, cnRank } from "../utils";
+import { fmtNum } from "../utils";
 
 interface Props {
   kind: "daily" | "weekly";
@@ -129,7 +129,7 @@ function Section({ title, sub, icon, children }: { title: string; sub: string; i
 function Row({ r, idx, gain, cold }: { r: ReportSection; idx: number; gain: string; cold?: boolean }) {
   return (
     <div className={`report-row ${cold ? "cold" : ""}`}>
-      <div className="rank">{cnRank(idx)}</div>
+      <div className="rank">{idx}</div>
       <div className="repo-main" style={{ minWidth: 0 }}>
         <div className="repo-fullname">
           <span className="owner">{r.full_name.split("/")[0]}/</span>

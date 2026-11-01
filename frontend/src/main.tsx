@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import "@fontsource-variable/space-grotesk";
+import "@fontsource-variable/overpass";
 import "@fontsource-variable/jetbrains-mono";
 import "./styles.css";
 import App from "./App";

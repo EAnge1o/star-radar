@@ -9,23 +9,24 @@ export default function Hero({ stats }: { stats: Stats | null }) {
     day: "numeric",
     weekday: "long",
   });
+  void today;
 
   return (
     <section className="hero">
       <div className="wrap masthead">
         <div>
-          <div className="mast-date">{today} · GITHUB TRENDING, COMPOSED DAILY</div>
+          <div className="mast-date">{today} · MIDNIGHT TRANSIT DIAGRAM, COMPOSED DAILY</div>
           <h1 className="mast-title">
-            今日拣字 <em>{stats?.total_repos ?? 0}</em> 项,涨落皆有其时
+            今日 <em>{stats?.total_repos ?? 0}</em> 站在线路上,哪条线在提速?
           </h1>
           <p className="mast-line">
-            每轮观测重新拣选 GitHub 上正在起量的项目:增速实测为准,黑马以朱砂记之,
-            赛道各有其盘。标 ≈ 的数字是估算,配置 GITHUB_TOKEN 后自动升级为实测。
+            每轮观测重画线网:赛道是线路,头部项目是站点,HN 共振画成换乘环。
+            增速实测为准,标 ≈ 的是虚线区段(估算),配置 GITHUB_TOKEN 后升级为实测。
           </p>
           <div className="mast-meta">
-            <span>重新排字 · {timeAgo(stats?.last_fetch?.finished_at)}</span>
+            <span>线网更新 · {timeAgo(stats?.last_fetch?.finished_at)}</span>
             <span>j / k 移动 · Enter 展开 · / 搜索</span>
-            {!!stats?.resonant && <span>双平台共振 {stats.resonant} 项</span>}
+            {!!stats?.resonant && <span>换乘环 {stats.resonant} 处</span>}
           </div>
         </div>
         <div>
