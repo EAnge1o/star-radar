@@ -1,4 +1,4 @@
-import { Github, Moon, Newspaper, Radar, RefreshCw, Rows3, Settings2, Star, Sun } from "lucide-react";
+import { Github, Moon, Newspaper, RefreshCw, Rows3, Settings2, Star, Sun } from "lucide-react";
 import { timeAgo } from "../utils";
 
 interface Props {
@@ -20,9 +20,6 @@ export default function TopNav(p: Props) {
     <header className="nav">
       <div className="wrap nav-inner">
         <a className="logo" href="#/" onClick={(e) => { e.preventDefault(); window.location.hash = "#/"; }}>
-          <span className="logo-mark">
-            <Radar size={17} strokeWidth={2.2} />
-          </span>
           <span className="logo-name">
             Star<em>Radar</em>
           </span>

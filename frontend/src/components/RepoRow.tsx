@@ -1,7 +1,7 @@
 import { ChevronRight, Flame, Snowflake, Sparkles, Star, TriangleAlert, Waves } from "lucide-react";
 import { motion } from "framer-motion";
 import type { Repo } from "../types";
-import { fmtAge, fmtNum, langColor } from "../utils";
+import { cnRank, fmtAge, fmtNum, langColor } from "../utils";
 import Sparkline from "./Sparkline";
 
 interface Props {
@@ -11,6 +11,7 @@ interface Props {
   window: string;
   watched?: boolean;
   stagger?: boolean;
+  domainMax?: number;
   onOpen: (r: Repo) => void;
   onWatch?: (r: Repo) => void;
   cursor?: boolean;
@@ -21,7 +22,7 @@ function isNew(repo: Repo): boolean {
   return (Date.now() - new Date(repo.created_at).getTime()) / 86400000 <= 30;
 }
 
-export default function RepoRow({ repo, rank, board, window, watched, stagger = true, onOpen, onWatch, cursor }: Props) {
+export default function RepoRow({ repo, rank, board, window, watched, stagger = true, domainMax, onOpen, onWatch, cursor }: Props) {
   const delta = window === "1d" ? repo.stars_1d : window === "28d" ? repo.stars_28d : repo.stars_7d;
   const est = repo.velocity_est === 1;
   const winLabel = window === "1d" ? "近24h" : window === "28d" ? "近28天" : "近7日";
@@ -29,15 +30,23 @@ export default function RepoRow({ repo, rank, board, window, watched, stagger = 
 
   return (
     <motion.div
-      className={`repo-row ${cursor ? "row-cursor" : ""}`}
+      className={`repo-row ${cursor ? "row-cursor" : ""} ${repo.cooling === 1 ? "cold-row" : ""}`}
       onClick={() => onOpen(repo)}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onOpen(repo);
+        }
+      }}
       initial={stagger ? { opacity: 0, y: 12 } : false}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: stagger ? Math.min(rank * 0.03, 0.5) : 0, duration: 0.35, ease: "easeOut" }}
     >
       <div className="rank-wrap">
         <div className={`rank ${rank === 1 ? "r1" : rank === 2 ? "r2" : rank === 3 ? "r3" : ""}`}>
-          {rank}
+          {cnRank(rank)}
         </div>
         {rankDelta != null && rankDelta !== 0 && (
           <div className={`rank-delta ${rankDelta > 0 ? "up" : "down"}`}>
@@ -63,8 +72,8 @@ export default function RepoRow({ repo, rank, board, window, watched, stagger = 
             </span>
           )}
           {repo.cooling === 1 && (
-            <span className="badge cold" title="曾上榜,近期增长停滞">
-              <Snowflake size={10} /> 降温
+            <span className="badge cold" title="曾上榜,近期增长停滞——只销户,不下架">
+              <Snowflake size={10} /> 撤
             </span>
           )}
           {repo.marketing === 1 && (
@@ -99,7 +108,7 @@ export default function RepoRow({ repo, rank, board, window, watched, stagger = 
       </div>
 
       <div className="spark-cell">
-        <Sparkline spark={repo.spark} />
+        <Sparkline spark={repo.spark} domainMax={domainMax} />
       </div>
 
       <div className="delta-cell">

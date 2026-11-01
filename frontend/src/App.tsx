@@ -167,6 +167,9 @@ export default function App() {
 
   // 键盘导航:j/k 移动,Enter 开详情,/ 聚焦搜索
   const rows = data?.repos ?? [];
+  const sparkMax = rows.length
+    ? Math.max(1, ...rows.flatMap((r) => (r.spark ?? []).map(([, v]) => v)))
+    : undefined;
   useEffect(() => {
     const onKey = (e: KeyboardEvent) => {
       const tag = (e.target as HTMLElement)?.tagName;
@@ -298,7 +301,7 @@ export default function App() {
         )}
         {toast && (
           <motion.div key="toast" className="toast" initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 10 }}>
-            <CircleAlert size={14} style={{ color: "var(--cyan)" }} />
+            <CircleAlert size={14} style={{ color: "var(--accent)" }} />
             {toast}
           </motion.div>
         )}
@@ -400,6 +403,7 @@ export default function App() {
                 onOpen={setDetail}
                 onWatch={toggleWatch}
                 cursor={cursor === i}
+                domainMax={sparkMax}
               />
             ))}
         </div>

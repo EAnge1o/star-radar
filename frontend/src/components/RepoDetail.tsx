@@ -109,7 +109,7 @@ export default function RepoDetail({ repo, onClose, onNavigate }: { repo: Repo; 
           </div>
           <div className="stat-box">
             <div className="k">HN 热度</div>
-            <div className="v" style={{ color: d.resonance === 1 ? "var(--cyan)" : undefined }}>
+            <div className="v" style={{ color: d.resonance === 1 ? "var(--accent)" : undefined }}>
               {d.hn_points ? `${fmtInt(d.hn_points)} pts` : "—"}
             </div>
           </div>

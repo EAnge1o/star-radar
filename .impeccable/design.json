@@ -1,0 +1,51 @@
+{
+  "schema": "impeccable:design 1",
+  "world": "The Composing Room (活字排字房)",
+  "seed": "e64abb6b31d6f818",
+  "mode": "operate",
+  "themes": {
+    "dark": {
+      "bg0": "#15171b",
+      "bg1": "#191c21",
+      "panel": "#1c1f25",
+      "ink": "#e8e2d5",
+      "sub": "#b3aa99",
+      "faint": "#8a8274",
+      "accent": "#b98a44",
+      "zhusha": "#c9413c",
+      "green": "#7fa86b",
+      "down": "#b0614e",
+      "line": "rgba(232,226,213,0.16)",
+      "lineSoft": "rgba(232,226,213,0.09)",
+      "block": "#101215"
+    },
+    "light": {
+      "bg0": "#ece6d9",
+      "bg1": "#e5ded0",
+      "panel": "#f4f0e7",
+      "ink": "#211d16",
+      "sub": "#4d463a",
+      "faint": "#6b6254",
+      "accent": "#7a5a28",
+      "zhusha": "#b23a35",
+      "green": "#557a43",
+      "down": "#a05541",
+      "line": "rgba(33,29,22,0.2)",
+      "lineSoft": "rgba(33,29,22,0.11)",
+      "block": "#e2dccd"
+    }
+  },
+  "fonts": {
+    "display": "Noto Serif SC / Source Han Serif SC / SimSun stack",
+    "data": "JetBrains Mono Variable (tabular-nums)",
+    "ui": "system sans (PingFang SC / Microsoft YaHei stack)"
+  },
+  "signature": {
+    "typeBlockState": "solid border = measured, dashed border = estimated, line-through = retired (撤)",
+    "leadBox": "vermilion corner tag, one per day",
+    "chineseRankNumerals": true,
+    "sharedSparkDomain": true,
+    "singleAuthoredMotion": "board compose stagger"
+  },
+  "bans": ["gradient text", "eyebrow labels", "zero-offset colored glows", "colored border-left callouts", "ghost cards", "chart gradient fills"]
+}

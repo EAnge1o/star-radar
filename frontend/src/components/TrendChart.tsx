@@ -9,32 +9,22 @@ interface Props {
 /** 大号趋势图(项目 Star 曲线 / 赛道热度),y 轴自适应数据区间。 */
 export default function TrendChart({ data, height = 190, domainPad = 400 }: Props) {
   return (
-    <ResponsiveContainer width="100%" height={height}>
-      <AreaChart data={data} margin={{ top: 8, right: 6, bottom: 0, left: 0 }}>
-        <defs>
-          <linearGradient id="tc-stroke" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#22d3ee" />
-            <stop offset="100%" stopColor="#a78bfa" />
-          </linearGradient>
-          <linearGradient id="tc-fill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#22d3ee" stopOpacity={0.32} />
-            <stop offset="100%" stopColor="#22d3ee" stopOpacity={0} />
-          </linearGradient>
-        </defs>
+    <ResponsiveContainer width="100%" height={height} style={{ color: "var(--accent)" }}>
+      <AreaChart data={data} margin={{ top: 8, right: 6, bottom: 0, left: 0 }} className="trend-chart">
         <YAxis hide domain={[`dataMin - ${domainPad}`, `dataMax + ${Math.max(20, Math.round(domainPad / 3))}`]} />
         <XAxis
           dataKey="t"
-          tick={{ fill: "#5f6b85", fontSize: 10.5, fontFamily: "JetBrains Mono Variable" }}
-          axisLine={{ stroke: "rgba(148,163,184,.15)" }}
+          tick={{ fontSize: 10.5, fontFamily: "JetBrains Mono Variable", fill: "var(--faint)" }}
+          axisLine={{ stroke: "var(--line)" }}
           tickLine={false}
           minTickGap={36}
         />
         <Area
           type="monotone"
           dataKey="v"
-          stroke="url(#tc-stroke)"
-          strokeWidth={2.4}
-          fill="url(#tc-fill)"
+          stroke="currentColor"
+          strokeWidth={2}
+          fill="var(--accent-soft)"
           isAnimationActive={false}
         />
       </AreaChart>

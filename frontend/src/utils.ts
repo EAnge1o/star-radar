@@ -36,6 +36,19 @@ export function fmtAge(createdIso: string | null | undefined): string {
   return `${(d / 365).toFixed(1)} 年`;
 }
 
+const CN_DIGITS = ["零", "壹", "贰", "叁", "肆", "伍", "陆", "柒", "捌", "玖"];
+
+/** 榜单序号的汉字铅字写法:1→壹,11→拾壹,21→贰拾壹;>99 回落阿拉伯数字。 */
+export function cnRank(n: number): string {
+  if (n <= 0 || n > 99) return String(n);
+  if (n < 10) return CN_DIGITS[n];
+  if (n === 10) return "拾";
+  if (n < 20) return "拾" + CN_DIGITS[n - 10];
+  const t = Math.floor(n / 10);
+  const o = n % 10;
+  return CN_DIGITS[t] + "拾" + (o ? CN_DIGITS[o] : "");
+}
+
 const LANG_COLORS: Record<string, string> = {
   Python: "#4B8BBE",
   TypeScript: "#3178C6",
