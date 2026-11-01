@@ -163,7 +163,7 @@ export default function App() {
       <footer className="footer">
         <div className="wrap cols">
           <div>
-            <b>StarRadar · 开源趋势雷达</b>
+            <b>StarRadar · GitHub 趋势雷达</b>
             <br />
             增速数据来自 GitHub Search API + 每日快照差值;标注 <span className="badge-est">≈</span>{" "}
             表示基于仓库年龄的估算(配置 GITHUB_TOKEN 后自动升级为精确采样)。

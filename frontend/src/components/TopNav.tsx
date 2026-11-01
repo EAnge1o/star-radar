@@ -19,7 +19,7 @@ export default function TopNav({ lastFetchAt, refreshing, onRefresh, onSettings 
           <span className="logo-name">
             Star<em>Radar</em>
           </span>
-          <span className="logo-sub">开源趋势雷达</span>
+          <span className="logo-sub">GitHub 趋势雷达</span>
         </a>
         <div className="nav-right">
           <span className="obs-at">

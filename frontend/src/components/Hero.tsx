@@ -10,7 +10,7 @@ export default function Hero({ stats }: { stats: Stats | null }) {
       <div>
         <span className="hero-kicker">GITHUB TRENDING RADAR · 每日自动观测</span>
         <h1 className="hero-title">
-          看见开源世界的
+          看见 GitHub 的
           <br />
           <span className="grad">下一颗新星</span>
         </h1>

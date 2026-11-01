@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Area, AreaChart, ResponsiveContainer, XAxis } from "recharts";
+import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
 import { ExternalLink, Flame, Sparkles, X } from "lucide-react";
 import { api } from "../api";
 import type { Repo, RepoDetail as Detail } from "../types";
@@ -149,6 +149,7 @@ function SparkBars({ data }: { data: { t: string; v: number }[] }) {
             <stop offset="100%" stopColor="#22d3ee" stopOpacity={0} />
           </linearGradient>
         </defs>
+        <YAxis hide domain={["dataMin - 400", "dataMax + 150"]} />
         <XAxis
           dataKey="t"
           tick={{ fill: "#5f6b85", fontSize: 10.5, fontFamily: "JetBrains Mono Variable" }}
@@ -160,8 +161,9 @@ function SparkBars({ data }: { data: { t: string; v: number }[] }) {
           type="monotone"
           dataKey="v"
           stroke="url(#dc-stroke)"
-          strokeWidth={2.2}
+          strokeWidth={2.4}
           fill="url(#dc-fill)"
+          isAnimationActive={false}
         />
       </AreaChart>
     </ResponsiveContainer>
