@@ -1,0 +1,12 @@
+{
+  "name": "StarRadar · GitHub 趋势雷达",
+  "short_name": "StarRadar",
+  "description": "自托管的 GitHub trending 观测工具:真实增速排行、新秀、黑马、赛道、推送",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#04060d",
+  "theme_color": "#04060d",
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

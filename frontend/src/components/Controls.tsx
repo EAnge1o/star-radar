@@ -1,6 +1,7 @@
-import { Bot, Search } from "lucide-react";
+import { Bot, ListFilter, Search, Settings2 } from "lucide-react";
+import type { Sub } from "../types";
 
-export type BoardKind = "velocity" | "fresh" | "total";
+export type BoardKind = "velocity" | "fresh" | "total" | "cooling" | "sub";
 export type WindowKind = "1d" | "7d" | "28d";
 
 interface Props {
@@ -10,11 +11,15 @@ interface Props {
   q: string;
   aiOnly: boolean;
   languages: string[];
+  subs: Sub[];
+  subId: number;
   onBoard: (b: BoardKind) => void;
   onWindow: (w: WindowKind) => void;
   onLang: (l: string) => void;
   onQ: (q: string) => void;
   onAiOnly: (v: boolean) => void;
+  onSub: (id: number) => void;
+  onManageSubs: () => void;
 }
 
 export default function Controls(p: Props) {
@@ -26,12 +31,26 @@ export default function Controls(p: Props) {
             ["velocity", "增速榜"],
             ["fresh", "新秀榜"],
             ["total", "总量榜"],
+            ["cooling", "降温榜"],
           ] as [BoardKind, string][]
         ).map(([k, label]) => (
           <button key={k} className={p.board === k ? "on" : ""} onClick={() => p.onBoard(k)}>
             {label}
           </button>
         ))}
+        {p.subs.map((s) => (
+          <button
+            key={"sub" + s.id}
+            className={p.board === "sub" && p.subId === s.id ? "on" : ""}
+            onClick={() => p.onSub(s.id)}
+            title={`订阅:${s.query}`}
+          >
+            ★ {s.name}
+          </button>
+        ))}
+        <button className="seg-manage" onClick={p.onManageSubs} title="管理关键词订阅">
+          <Settings2 size={13} />
+        </button>
       </div>
 
       {p.board === "velocity" && (
@@ -53,7 +72,8 @@ export default function Controls(p: Props) {
       <div className="search-box">
         <Search size={14} />
         <input
-          placeholder="搜索项目 / 关键词 / 点评…"
+          id="board-search"
+          placeholder="搜索项目 / 关键词 / 点评…(按 / 聚焦)"
           value={p.q}
           onChange={(e) => p.onQ(e.target.value)}
         />

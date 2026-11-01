@@ -5,7 +5,7 @@ import statistics
 from datetime import datetime, timedelta, timezone
 from typing import Optional
 
-from . import ai, config, db, github, tracks
+from . import ai, config, db, enrich, github, tracks
 
 AI_KEYWORDS = [
     "llm", "agent", "ai", "gpt", "rag", "mcp", "transformer", "diffusion",
@@ -61,6 +61,7 @@ def parse_repo(item: dict) -> dict:
         "stars": item.get("stargazers_count") or 0,
         "forks": item.get("forks_count") or 0,
         "open_issues": item.get("open_issues_count") or 0,
+        "size": item.get("size"),
         "created_at": item.get("created_at"),
         "pushed_at": item.get("pushed_at"),
     }
@@ -134,6 +135,28 @@ async def _run(gh: github.GitHubClient, started: str,
             items = []
         for it in items:
             seen[it["id"]] = parse_repo(it)
+
+    # 自定义订阅查询(关键词订阅):并入候选池,并记录各自的结果集
+    sub_items: dict[int, list[dict]] = {}
+    with db.db() as con:
+        subs = [dict(r) for r in con.execute("SELECT * FROM subscriptions")]
+    for sub in subs:
+        try:
+            items = await gh.search_repos(sub["query"], pages=1)
+        except Exception as e:
+            print(f"[fetch] sub '{sub['name']}' failed: {e}")
+            items = None  # 失败时保留旧结果集
+        if items is not None:
+            parsed = []
+            for it in items[:100]:
+                p = parse_repo(it)
+                seen[p["gh_id"]] = p
+                parsed.append(p)
+            sub_items[sub["id"]] = parsed
+    if not seen:
+        raise RuntimeError(
+            "搜索一无所获 —— 网络/TLS 异常或限流,本轮中止以保护已有数据"
+        )
     print(f"[fetch] {len(seen)} candidate repos")
 
     existing = {}
@@ -233,26 +256,28 @@ async def _run(gh: github.GitHubClient, started: str,
                 """
                 INSERT INTO repos(gh_id, full_name, owner, owner_type, avatar_url,
                     description, language, topics, license, stars, forks, open_issues,
-                    created_at, pushed_at, first_seen, stars_1d, stars_7d, stars_28d,
-                    velocity_est, score, is_ai, spark, updated_at)
-                VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
+                    size, created_at, pushed_at, first_seen, stars_1d, stars_7d, stars_28d,
+                    velocity_est, prev_score, score, is_ai, spark, updated_at)
+                VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)
                 ON CONFLICT(gh_id) DO UPDATE SET
                     full_name=excluded.full_name, owner=excluded.owner,
                     owner_type=excluded.owner_type, avatar_url=excluded.avatar_url,
                     description=excluded.description, language=excluded.language,
                     topics=excluded.topics, license=excluded.license, stars=excluded.stars,
                     forks=excluded.forks, open_issues=excluded.open_issues,
+                    size=excluded.size,
                     created_at=excluded.created_at, pushed_at=excluded.pushed_at,
                     stars_1d=excluded.stars_1d, stars_7d=excluded.stars_7d,
                     stars_28d=excluded.stars_28d, velocity_est=excluded.velocity_est,
-                    score=excluded.score, is_ai=excluded.is_ai, updated_at=excluded.updated_at,
+                    prev_score=repos.score, score=excluded.score, is_ai=excluded.is_ai,
+                    updated_at=excluded.updated_at,
                     spark=COALESCE(excluded.spark, repos.spark)
                 """,
                 (gh_id, r["full_name"], r["owner"], r["owner_type"], r["avatar_url"],
                  r["description"], r["language"], r["topics"], r["license"], stars,
-                 r["forks"], r["open_issues"], r["created_at"], r["pushed_at"],
+                 r["forks"], r["open_issues"], r["size"], r["created_at"], r["pushed_at"],
                  existing.get(gh_id, {}).get("first_seen", started),
-                 s1, s7, s28, est, score, is_ai,
+                 s1, s7, s28, est, None, score, is_ai,
                  json.dumps(spark, ensure_ascii=False) if spark else None,
                  started),
             )
@@ -270,6 +295,18 @@ async def _run(gh: github.GitHubClient, started: str,
 
     # ---------- 黑马:增速相对同语言基线 ----------
     _mark_black_horses()
+
+    # ---------- 订阅结果集 ----------
+    if sub_items:
+        with db.db() as con:
+            for sid, items in sub_items.items():
+                con.execute("DELETE FROM sub_results WHERE sub_id=?", (sid,))
+                for pos, p in enumerate(items, 1):
+                    con.execute(
+                        "INSERT OR IGNORE INTO sub_results(sub_id, gh_id, position, taken_at)"
+                        " VALUES (?,?,?,?)",
+                        (sid, p["gh_id"], pos, started),
+                    )
 
     # ---------- LLM 点评 ----------
     commentary_done = 0
@@ -293,11 +330,14 @@ async def _run(gh: github.GitHubClient, started: str,
 
     # ---------- 赛道 ----------
     track_method = None
-    if with_tracks:
+    if with_tracks and upserted:
         try:
             _clusters, track_method = rebuild_tracks(upserted)
         except Exception as e:
             print(f"[fetch] tracks failed: {e}")
+
+    # ---------- 富化:排名/赛道热度/降温/营销/HN/commits/Watchlist ----------
+    await enrich.post_process(gh)
 
     with db.db() as con:
         con.execute(

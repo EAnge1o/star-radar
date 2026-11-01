@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
-import { Area, AreaChart, ResponsiveContainer, XAxis, YAxis } from "recharts";
-import { ExternalLink, Flame, Sparkles, X } from "lucide-react";
+import { ExternalLink, FileText, Flame, GitCommitHorizontal, Snowflake, Sparkles, X } from "lucide-react";
 import { api } from "../api";
 import type { Repo, RepoDetail as Detail } from "../types";
 import { fmtAge, fmtInt, fmtNum, langColor, timeAgo } from "../utils";
+import TrendChart from "./TrendChart";
 import Sparkline from "./Sparkline";
 
-export default function RepoDetail({ repo, onClose }: { repo: Repo; onClose: () => void }) {
+export default function RepoDetail({ repo, onClose, onNavigate }: { repo: Repo; onClose: () => void; onNavigate?: (full: string) => void }) {
   const [detail, setDetail] = useState<Detail | null>(null);
 
   useEffect(() => {
@@ -23,6 +23,7 @@ export default function RepoDetail({ repo, onClose }: { repo: Repo; onClose: () 
 
   const d = detail ?? repo;
   const snaps = detail?.snapshots ?? [];
+  const related = detail?.related ?? [];
 
   return (
     <div className="overlay" onClick={onClose}>
@@ -42,9 +43,14 @@ export default function RepoDetail({ repo, onClose }: { repo: Repo; onClose: () 
                   <Flame size={10} /> 黑马
                 </span>
               )}
+              {d.cooling === 1 && (
+                <span className="badge cold" style={{ marginLeft: 8, verticalAlign: "middle" }}>
+                  <Snowflake size={10} /> 降温
+                </span>
+              )}
             </h2>
             <p className="detail-desc">{d.description || "暂无官方描述"}</p>
-            <div style={{ display: "flex", gap: 12, alignItems: "center", marginTop: 8, fontSize: 12, color: "var(--faint)" }}>
+            <div style={{ display: "flex", gap: 12, flexWrap: "wrap", alignItems: "center", marginTop: 8, fontSize: 12, color: "var(--faint)" }}>
               {d.language && (
                 <span style={{ display: "inline-flex", alignItems: "center", gap: 6 }}>
                   <span className="lang-dot" style={{ background: langColor(d.language) }} />
@@ -54,6 +60,7 @@ export default function RepoDetail({ repo, onClose }: { repo: Repo; onClose: () 
               <span>创建于 {d.created_at?.slice(0, 10) || "—"}({fmtAge(d.created_at)})</span>
               <span>最近推送 {timeAgo(d.pushed_at)}</span>
               {d.license && <span>{d.license}</span>}
+              {d.owner_type === "Organization" && <span>组织出品</span>}
             </div>
             <a className="detail-cta" href={`https://github.com/${d.full_name}`} target="_blank" rel="noreferrer">
               <ExternalLink size={13} /> 在 GitHub 打开
@@ -94,7 +101,38 @@ export default function RepoDetail({ repo, onClose }: { repo: Repo; onClose: () 
             <div className="k">OPEN ISSUES</div>
             <div className="v">{fmtInt(d.open_issues)}</div>
           </div>
+          <div className="stat-box">
+            <div className="k">
+              <GitCommitHorizontal size={11} style={{ verticalAlign: -2 }} /> 近7日 COMMITS
+            </div>
+            <div className="v">{d.commits_7d != null ? fmtInt(d.commits_7d) : "—"}</div>
+          </div>
+          <div className="stat-box">
+            <div className="k">HN 热度</div>
+            <div className="v" style={{ color: d.resonance === 1 ? "var(--cyan)" : undefined }}>
+              {d.hn_points ? `${fmtInt(d.hn_points)} pts` : "—"}
+            </div>
+          </div>
+          <div className="stat-box">
+            <div className="k">FORK/STAR</div>
+            <div className="v">{d.stars ? ((d.forks / d.stars) * 100).toFixed(1) + "%" : "—"}</div>
+          </div>
+          <div className="stat-box">
+            <div className="k">代码规模</div>
+            <div className="v">
+              {d.size != null && d.size > 0 ? (d.size >= 1024 ? (d.size / 1024).toFixed(1) + " MB" : d.size + " KB") : "—"}
+            </div>
+          </div>
         </div>
+
+        {d.readme_summary && (
+          <div className="readme-card">
+            <div className="label">
+              <FileText size={12} /> README 摘要
+            </div>
+            <div className="point">{d.readme_summary}</div>
+          </div>
+        )}
 
         <div className="detail-chart">
           <div className="label">
@@ -105,11 +143,27 @@ export default function RepoDetail({ repo, onClose }: { repo: Repo; onClose: () 
                 : "STAR 增长轨迹 · 观测数据累积中"}
           </div>
           {snaps.length > 1 ? (
-            <SnapshotChart snaps={snaps} />
+            <TrendChart
+              data={snaps.map((s) => ({ t: s.taken_at.slice(5, 10), v: s.stars }))}
+            />
           ) : (
             <Sparkline spark={d.spark} height={d.spark && d.spark.length > 2 ? 170 : 120} showAxis />
           )}
         </div>
+
+        {related.length > 0 && (
+          <div className="related-box">
+            <div className="label">同赛道项目 · 顺着逛</div>
+            <div className="related-list">
+              {related.map((x) => (
+                <button key={x.full_name} className="related-item" onClick={() => onNavigate?.(x.full_name)}>
+                  <span className="mono">{x.full_name}</span>
+                  <span className="sub">{fmtNum(x.stars)} ★ · {x.language || "—"}</span>
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
 
         {d.topics && d.topics.length > 0 && (
           <div className="detail-topics">
@@ -122,50 +176,5 @@ export default function RepoDetail({ repo, onClose }: { repo: Repo; onClose: () 
         )}
       </div>
     </div>
-  );
-}
-
-function SnapshotChart({ snaps }: { snaps: { stars: number; taken_at: string }[] }) {
-  const data = snaps.map((s) => ({
-    t: s.taken_at.slice(5, 10),
-    v: s.stars,
-  }));
-  return (
-    <SparkBars data={data} />
-  );
-}
-
-function SparkBars({ data }: { data: { t: string; v: number }[] }) {
-  return (
-    <ResponsiveContainer width="100%" height={190}>
-      <AreaChart data={data} margin={{ top: 8, right: 6, bottom: 0, left: 0 }}>
-        <defs>
-          <linearGradient id="dc-stroke" x1="0" y1="0" x2="1" y2="0">
-            <stop offset="0%" stopColor="#22d3ee" />
-            <stop offset="100%" stopColor="#a78bfa" />
-          </linearGradient>
-          <linearGradient id="dc-fill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#22d3ee" stopOpacity={0.32} />
-            <stop offset="100%" stopColor="#22d3ee" stopOpacity={0} />
-          </linearGradient>
-        </defs>
-        <YAxis hide domain={["dataMin - 400", "dataMax + 150"]} />
-        <XAxis
-          dataKey="t"
-          tick={{ fill: "#5f6b85", fontSize: 10.5, fontFamily: "JetBrains Mono Variable" }}
-          axisLine={{ stroke: "rgba(148,163,184,.15)" }}
-          tickLine={false}
-          minTickGap={36}
-        />
-        <Area
-          type="monotone"
-          dataKey="v"
-          stroke="url(#dc-stroke)"
-          strokeWidth={2.4}
-          fill="url(#dc-fill)"
-          isAnimationActive={false}
-        />
-      </AreaChart>
-    </ResponsiveContainer>
   );
 }

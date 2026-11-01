@@ -114,7 +114,9 @@ async def semantic_cluster(repos: list[dict]) -> Optional[list[dict]]:
 
 
 def cluster_repos(repos: list[dict]) -> tuple[list[dict], str]:
-    """入口:返回 (clusters, method)。在独立线程跑事件循环,避免与主循环冲突。"""
+    """入口:返回 (clusters, method)。空输入直接返回空,绝不清空已有赛道。"""
+    if not repos:
+        return [], "skip-empty"
     sem = None
     if ai.available() and len(repos) >= 6:
         try:

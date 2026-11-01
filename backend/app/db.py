@@ -28,8 +28,19 @@ CREATE TABLE IF NOT EXISTS repos (
   stars_28d    REAL,
   velocity_est INTEGER DEFAULT 1,
   score        REAL DEFAULT 0,
+  prev_score   REAL,
   black_horse  INTEGER DEFAULT 0,
   is_ai        INTEGER DEFAULT 0,
+  size         INTEGER,
+  commits_7d   INTEGER,
+  hn_points    INTEGER,
+  hn_comments  INTEGER,
+  hn_time      TEXT,
+  resonance    INTEGER DEFAULT 0,
+  cooling      INTEGER DEFAULT 0,
+  marketing    INTEGER DEFAULT 0,
+  marketing_method TEXT,
+  readme_summary   TEXT,
   commentary   TEXT,
   commentary_why TEXT,
   commentary_model TEXT,
@@ -69,6 +80,71 @@ CREATE TABLE IF NOT EXISTS fetch_runs (
   repos_seen INTEGER DEFAULT 0,
   repos_new  INTEGER DEFAULT 0
 );
+
+CREATE TABLE IF NOT EXISTS watchlist (
+  gh_id          INTEGER PRIMARY KEY,
+  full_name      TEXT UNIQUE NOT NULL,
+  note           TEXT,
+  added_at       TEXT NOT NULL,
+  last_milestone REAL,
+  last_surge_at  TEXT
+);
+
+CREATE TABLE IF NOT EXISTS subscriptions (
+  id         INTEGER PRIMARY KEY AUTOINCREMENT,
+  name       TEXT NOT NULL,
+  query      TEXT NOT NULL,
+  created_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS sub_results (
+  sub_id   INTEGER NOT NULL,
+  gh_id    INTEGER NOT NULL,
+  position INTEGER NOT NULL,
+  taken_at TEXT NOT NULL,
+  PRIMARY KEY (sub_id, gh_id)
+);
+
+CREATE TABLE IF NOT EXISTS ranks (
+  board    TEXT NOT NULL,
+  window   TEXT NOT NULL,
+  gh_id    INTEGER NOT NULL,
+  rank     INTEGER NOT NULL,
+  taken_at TEXT NOT NULL,
+  PRIMARY KEY (board, window, gh_id, taken_at)
+);
+
+CREATE TABLE IF NOT EXISTS notifications (
+  id         INTEGER PRIMARY KEY AUTOINCREMENT,
+  gh_id      INTEGER,
+  full_name  TEXT,
+  kind       TEXT NOT NULL,
+  title      TEXT NOT NULL,
+  message    TEXT,
+  link       TEXT,
+  channel    TEXT,
+  delivered  INTEGER DEFAULT 0,
+  created_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS track_heat (
+  id       INTEGER PRIMARY KEY AUTOINCREMENT,
+  label    TEXT NOT NULL,
+  heat     REAL NOT NULL,
+  size     INTEGER NOT NULL,
+  taken_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS readme_cache (
+  gh_id      INTEGER PRIMARY KEY,
+  text       TEXT NOT NULL,
+  updated_at TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS settings (
+  key   TEXT PRIMARY KEY,
+  value TEXT
+);
 """
 
 
@@ -92,6 +168,30 @@ def db():
 def init_db():
     with db() as con:
         con.executescript(SCHEMA)
+        _migrate(con)
+
+
+# 已有库升级:缺的列用 ALTER 补上(幂等)
+_NEW_REPO_COLUMNS = [
+    ("prev_score", "REAL"),
+    ("size", "INTEGER"),
+    ("commits_7d", "INTEGER"),
+    ("hn_points", "INTEGER"),
+    ("hn_comments", "INTEGER"),
+    ("hn_time", "TEXT"),
+    ("resonance", "INTEGER DEFAULT 0"),
+    ("cooling", "INTEGER DEFAULT 0"),
+    ("marketing", "INTEGER DEFAULT 0"),
+    ("marketing_method", "TEXT"),
+    ("readme_summary", "TEXT"),
+]
+
+
+def _migrate(con: sqlite3.Connection):
+    existing = {r["name"] for r in con.execute("PRAGMA table_info(repos)")}
+    for col, typ in _NEW_REPO_COLUMNS:
+        if col not in existing:
+            con.execute(f"ALTER TABLE repos ADD COLUMN {col} {typ}")
 
 
 def rows_to_dicts(rows: Iterable[sqlite3.Row]) -> list[dict[str, Any]]:
