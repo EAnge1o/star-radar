@@ -328,7 +328,7 @@ h1, h2, h3 {
   color: var(--accent);
 }
 
-/* 报眼:今日最热,朱砂记号 */
+/* 今日首发卡:当日全网新增,朱砂记号 */
 .lead-box {
   border: 1px solid var(--line);
   background: var(--panel);

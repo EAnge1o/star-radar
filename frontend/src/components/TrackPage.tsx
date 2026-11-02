@@ -39,7 +39,7 @@ function LineDiagram({ label, members }: { label: string; members: Repo[] }) {
   return (
     <div className="detail-chart" style={{ padding: "18px 12px 6px", overflowX: "auto" }}>
       <div className="label">
-        线路图 · 站点 = 头部项目(大小按 Star),双环 = HN 共振换乘,折角恒为 45°
+        线路图 · 圆点为头部项目,大小按 Star;双环为 HN 换乘;折角恒 45°
       </div>
       <svg viewBox="0 0 1060 120" style={{ width: "100%", minWidth: 720, display: "block" }} role="img"
         aria-label={`${label} 线路图`}>
@@ -148,7 +148,7 @@ export default function TrackPage({ label, onBack, onOpen, watched, onWatch }: P
       )}
 
       <div className="section-head" style={{ marginTop: 26 }}>
-        <h2 className="section-title" style={{ fontSize: 16 }}>成员榜单</h2>
+        <h2 className="section-title" style={{ fontSize: 16 }}>沿线站点</h2>
         <span className="section-sub">{members.length} 个项目 · 按综合增速排序</span>
       </div>
       <div className="repo-list">

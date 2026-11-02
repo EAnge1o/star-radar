@@ -38,7 +38,7 @@ export default function TrackStrip({ tracks, activeTrackId, onSelect }: Props) {
           线网总览
         </h2>
         <span className="section-sub">
-          赛道即线路 · 热度 = 线路内近 7 日 Star 占比 · 点击进线看站点
+          赛道即线路 · 热度为线路内近 7 日 Star 占比 · 点击进入线路
         </span>
       </div>
       <div className="tracks">
@@ -60,7 +60,7 @@ export default function TrackStrip({ tracks, activeTrackId, onSelect }: Props) {
               <div className="track-label">{t.label}</div>
               <div className="track-summary">{t.summary || "—"}</div>
               <div className="track-meta">
-                <span>{t.size} 站</span>
+                <span>{t.size} 个项目</span>
                 <span style={{ color: active ? c : undefined }}>热度 {(t.heat * 100).toFixed(0)}</span>
               </div>
               <div className="heat-bar">

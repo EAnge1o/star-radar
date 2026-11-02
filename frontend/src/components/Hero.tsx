@@ -9,22 +9,22 @@ export default function Hero({ stats }: { stats: Stats | null }) {
     day: "numeric",
     weekday: "long",
   });
-  void today;
 
   return (
     <section className="hero">
       <div className="wrap masthead">
         <div>
-          <div className="mast-date">{today} · MIDNIGHT TRANSIT DIAGRAM, COMPOSED DAILY</div>
+          <div className="mast-date">{today} · MIDNIGHT TRANSIT DIAGRAM · REDRAWN EVERY SIX HOURS</div>
           <h1 className="mast-title">
-            今日 <em>{stats?.total_repos ?? 0}</em> 站在线路上,哪条线在提速?
+            线网今日重绘,提速的在<em>这几条</em>
           </h1>
           <p className="mast-line">
-            每轮观测重画线网:赛道是线路,头部项目是站点,HN 共振画成换乘环。
-            增速实测为准,标 ≈ 的是虚线区段(估算),配置 GITHUB_TOKEN 后升级为实测。
+            全网 {fmtInt(stats?.total_repos ?? 0)} 个项目、{stats?.tracks ?? 0} 条线路在册。
+            赛道为线路,头部项目为站点,与 Hacker News 同时起量者,以换乘环标注;
+            增速均为实测,标 ≈ 者为估算。
           </p>
           <div className="mast-meta">
-            <span>线网更新 · {timeAgo(stats?.last_fetch?.finished_at)}</span>
+            <span>最近重绘 · {timeAgo(stats?.last_fetch?.finished_at)}</span>
             <span>j / k 移动 · Enter 展开 · / 搜索</span>
             {!!stats?.resonant && <span>换乘环 {stats.resonant} 处</span>}
           </div>
@@ -32,7 +32,7 @@ export default function Hero({ stats }: { stats: Stats | null }) {
         <div>
           <div className="lead-box">
             <div className="kpi-label">
-              <Radio size={12} /> 报眼 · 今日新增 STAR
+              <Radio size={12} /> 今日首发 · 全网新增 STAR
             </div>
             <div className="lead-num">
               +{fmtNum(stats?.today_new_stars ?? 0)}
