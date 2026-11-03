@@ -1,5 +1,6 @@
-import { Bot, ListFilter, Search, Settings2 } from "lucide-react";
+import { Bot, Search, Settings2 } from "lucide-react";
 import type { Sub } from "../types";
+import type { SortKey } from "../App";
 
 export type BoardKind = "velocity" | "fresh" | "total" | "cooling" | "sub";
 export type WindowKind = "1d" | "7d" | "28d";
@@ -13,6 +14,8 @@ interface Props {
   languages: string[];
   subs: Sub[];
   subId: number;
+  sortKey: SortKey;
+  onSort: (s: SortKey) => void;
   onBoard: (b: BoardKind) => void;
   onWindow: (w: WindowKind) => void;
   onLang: (l: string) => void;
@@ -78,6 +81,12 @@ export default function Controls(p: Props) {
           onChange={(e) => p.onQ(e.target.value)}
         />
       </div>
+
+      <select className="select" value={p.sortKey} onChange={(e) => p.onSort(e.target.value as SortKey)} title="排序">
+        <option value="score">按综合增速</option>
+        <option value="stars">按 Star 总量</option>
+        <option value="name">按名称</option>
+      </select>
 
       <select className="select" value={p.lang} onChange={(e) => p.onLang(e.target.value)}>
         <option value="">全部语言</option>

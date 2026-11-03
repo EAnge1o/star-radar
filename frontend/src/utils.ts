@@ -65,9 +65,9 @@ const LANG_COLORS: Record<string, string> = {
 
 /** 午夜线网:赛道线路色环(按 track id 稳定取色) */
 export const TRACK_COLORS = [
-  "#e3565c", "#4f7df0", "#f0a832", "#3fae76", "#9b6df0",
-  "#2ab8c9", "#e8743f", "#d4569b", "#8fb339", "#5a6acf",
-  "#c2b23a", "#e35d8f", "#5dc4a8",
+  "#4e79a7", "#f28e2b", "#59a14f", "#e15759", "#76b7b2",
+  "#edc948", "#b07aa1", "#ff9da7", "#9c755f", "#5f7d8c",
+  "#86bcb6", "#d37295", "#a0cbe8",
 ];
 
 export function trackColor(id: number | null | undefined): string {

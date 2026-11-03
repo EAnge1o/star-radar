@@ -1,55 +1,54 @@
 {
   "schema": "impeccable:design 1",
-  "world": "Midnight Transit Diagram (午夜线网)",
-  "sourceId": "wayfinding-cartography-signage-midnight-transit-diagram",
-  "seed": "e64abb6b31d6f818",
+  "world": "Premium AI SaaS Console",
+  "sourceId": "user-brief 2026-11-03 (pinned, beats roll)",
   "mode": "operate",
-  "pinned": "user 2026-11-02, replaces The Composing Room",
   "themes": {
-    "dark": {
-      "bg0": "#0f1930",
-      "bg1": "#132042",
-      "panel": "#16264a",
-      "ink": "#f2f0e6",
-      "sub": "#b8c4dd",
-      "faint": "#8b9bc0",
-      "accent": "#f0a832",
-      "scarlet": "#d13a3f",
-      "green": "#4fc47a",
-      "down": "#e35d5d",
-      "line": "rgba(242,240,230,0.18)",
-      "lineSoft": "rgba(242,240,230,0.09)",
-      "block": "#0b1224"
-    },
     "light": {
-      "bg0": "#edf1f8",
-      "bg1": "#e3e9f4",
-      "panel": "#f7f9fd",
-      "ink": "#16213c",
-      "sub": "#3d4a66",
-      "faint": "#566180",
-      "accent": "#96600f",
-      "scarlet": "#b23a35",
-      "green": "#2e8f52",
-      "down": "#c03f3f",
-      "line": "rgba(22,33,60,0.18)",
-      "lineSoft": "rgba(22,33,60,0.1)",
-      "block": "#dde4f0"
+      "bg": "#f7f8fa",
+      "surface": "#ffffff",
+      "border": "#e5e7eb",
+      "ink": "#111827",
+      "sub": "#6b7280",
+      "faint": "#9ca3af",
+      "primary": "#3e63dd",
+      "green": "#16a34a",
+      "orange": "#d97706",
+      "red": "#dc2626"
+    },
+    "dark": {
+      "bg": "#0f1115",
+      "surface": "#16181d",
+      "border": "#262a33",
+      "ink": "#f3f4f6",
+      "sub": "#9ca3af",
+      "faint": "#6b7280",
+      "primary": "#7a96f2",
+      "green": "#4ade80",
+      "orange": "#fbbf24",
+      "red": "#f87171"
     }
   },
-  "trackLineColors": ["#e3565c", "#4f7df0", "#f0a832", "#3fae76", "#9b6df0", "#2ab8c9", "#e8743f", "#d4569b", "#8fb339", "#5a6acf", "#c2b23a", "#e35d8f", "#5dc4a8"],
+  "trackLineColors": ["#4e79a7", "#f28e2b", "#59a14f", "#e15759", "#76b7b2", "#edc948", "#b07aa1", "#ff9da7", "#9c755f", "#5f7d8c", "#86bcb6", "#d37295", "#a0cbe8"],
   "fonts": {
-    "display": "Overpass Variable (signage)",
-    "data": "JetBrains Mono Variable (tabular-nums)",
-    "ui": "Overpass Variable + PingFang/YaHei stack"
+    "display": "Public Sans Variable + PingFang/YaHei stack",
+    "data": "JetBrains Mono Variable (tabular-nums)"
+  },
+  "layout": {
+    "shell": "fixed 232px sidebar + 56px toolbar + max-1240 content",
+    "mobile": "sidebar becomes overlay drawer"
+  },
+  "aiNative": {
+    "statusPills": "running(blue pulse) / idle / success(green) / failure(red)",
+    "agentCard": "last run result + interval + manual observe CTA",
+    "runsTable": "/api/runs real pipeline history",
+    "notificationFeed": "/api/notifications distribution log"
   },
   "signature": {
-    "lineDiagram": "selected track as a 45° polyline; stations = top repos sized by stars; double ring = HN interchange",
-    "lineChipDimBurn": "unselected cards at 0.8 opacity, selected burns",
-    "typeBlockState": "solid frame = measured, dashed = estimated, line-through = retired",
-    "leadCard": "今日首发, scarlet corner tag",
     "sharedSparkDomain": true,
-    "singleAuthoredMotion": "staggered chip/board entrance"
+    "rankDeltaArrows": true,
+    "trackDiagram": "data visualization on track pages, muted enterprise palette",
+    "confirmDestructive": true
   },
-  "bans": ["gradient text", "eyebrow labels", "zero-offset colored glows", "colored border-left callouts", "ghost cards", "chart gradient fills", "diagram-as-layout"]
+  "bans": ["large gradients", "neon", "purple AI cliché", "default dark pages", "glassmorphism", "meaningless decoration icons", "gradient text", "eyebrow labels", "zero-offset glows"]
 }

@@ -444,6 +444,34 @@ def settings_set(payload: dict):
     return {"ok": True, "settings": settings_get()["settings"]}
 
 
+@app.get("/api/runs")
+def runs(limit: int = 20):
+    """Agent 运行记录:每次观测的起止、状态与产出。"""
+    with db.db() as con:
+        rows = [dict(r) for r in con.execute(
+            "SELECT * FROM fetch_runs ORDER BY id DESC LIMIT ?",
+            (max(1, min(limit, 100)),),
+        ).fetchall()]
+    return {"runs": rows}
+
+
+@app.get("/api/agent/status")
+async def agent_status():
+    """Agent 实时状态:是否正在观测 + 最近一次运行。"""
+    running = _fetch_lock.locked()
+    with db.db() as con:
+        last = con.execute(
+            "SELECT * FROM fetch_runs ORDER BY id DESC LIMIT 1"
+        ).fetchone()
+    return {
+        "running": running,
+        "last_run": dict(last) if last else None,
+        "interval_hours": config.FETCH_INTERVAL_HOURS,
+        "llm_ready": ai.available(),
+        "github_token": bool(config.GITHUB_TOKEN),
+    }
+
+
 @app.get("/api/stats")
 def stats():
     with db.db() as con:

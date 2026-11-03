@@ -1,65 +1,58 @@
-# DESIGN.md — StarRadar「午夜线网」Midnight Transit Diagram
+# DESIGN.md — StarRadar Premium AI SaaS
 
 <!-- impeccable:design-schema 1 -->
 
-视觉世界的持久决定。由 2026-11-02 用户钉选的挑战者方向
-(wayfinding-cartography-signage-midnight-transit-diagram)替换「活字排字房」而来;
-codeseed e64abb6b31d6f818,operate 模式,code-led。
+视觉世界的持久决定。2026-11-03 由用户提供的完整设计简报钉选(Premium AI SaaS Product
+Design System),替换「午夜线网」;operate 模式,code-led。
 
 ## World thesis
 
-赛道即线路:GitHub 的赛道全景是一张午夜珐琅线网图,用户像查地铁一样查趋势。
-世界只贡献字体、色板、密度与一个签名动作;布局、导航、控件始终是标准 web 组件。
+一款成熟 AI SaaS 产品的观测控制台:左侧导航 + 顶栏 + 白色卡片的经典企业布局,
+信息密度服务效率,Agent 的运行状态与产出是一等公民。拒绝模板后台的廉价感,
+也拒绝装饰性隐喻——比喻词只保留在数据可视化里(赛道图谱)。
 
-## Palette(色彩策略:Committed——午夜蓝就是表面)
+## Palette(色彩策略:Restrained)
 
-| Token | 暗主题(午夜珐琅) | 明主题(白天口袋地图) | 用途 |
+| Token | 明主题(默认) | 暗主题(次选) | 用途 |
 |---|---|---|---|
-| `--bg0/1` | `#0f1930` / `#132042` | `#edf1f8` / `#e3e9f4` | 珐琅蓝地 |
-| `--panel` | `#16264a` | `#f7f9fd` | 一级抬升面板 |
-| `--ink` | `#f2f0e6` 瓷白 | `#16213c` 深蓝墨 | 站名与正文 |
-| `--sub` / `--faint` | `#b8c4dd` / `#8b9bc0` | `#3d4a66` / `#566180` | 次/弱层级(≥4.5:1) |
-| `--accent` 信号琥珀 | `#f0a832` | `#96600f` | 选中、热力、图表墨色 |
-| `--zhusha` 猩红 | `#d13a3f` | `#b23a35` | **仅**今日首发角签、黑马、黑马 KPI |
-| `--green` / `--down` | `#4fc47a` / `#e35d5d` | `#2e8f52` / `#c03f3f` | 涨 / 跌 |
-| 线路色环 |猩红/钴蓝/琥珀/绿/紫/青/橙/洋红… 13 色 | 同左(明度适配) | 每条赛道一色,按 track id 稳定取色 |
+| `--bg` | `#f7f8fa` | `#0f1115` | 页面地 |
+| `--surface` | `#ffffff` | `#16181d` | 卡片 |
+| `--border` | `#e5e7eb` | `#262a33` | 细边框 |
+| `--ink` | `#111827` | `#f3f4f6` | 主文字 |
+| `--sub` / `--faint` | `#6b7280` / `#9ca3af` | `#9ca3af` / `#6b7280` | 次级文字 |
+| `--primary` | `#3e63dd` | `#7a96f2` | 低饱和蓝主色:选中、主按钮、图表 |
+| `--green` / `--orange` / `--red` | `#16a34a` / `#d97706` / `#dc2626` | 暗色适配 | 状态语义(涨/黑马/失败) |
 
-猩红纪律:除今日首发、黑马、黑马 KPI 外不得出现。图表墨色一律 `var(--accent)`。
+阴影:`0 1px 2px rgba(16,24,40,.05)` 常态,hover `0 4px 14px`。深色背景默认不出现
+(用户可切暗主题,系统为同一 token 的暗色投影)。
 
 ## Type
 
-- 显示与 UI:`Overpass Variable`(公路/地铁导视血统的 signage sans),中文回落
-  PingFang/雅黑;标签小号、正字距。
+- UI 与显示:`Public Sans Variable`(企业级 grotesque)+ PingFang/雅黑栈。
 - 数据:`JetBrains Mono Variable`,一律 `tabular-nums`。
-- 站名/编号是 mono;报头与标题是 Overpass;不得混用。
+- 层级:页面标题 20px/700 → 卡片题 14.5px/700 → 正文 14 → 辅助 12.5 → 标签 11 大写。
 
-## Signature components
+## Layout(结构即世界观)
 
-- **线段卡(track-line chip)**:首页赛道卡的 45° 折线小样,线路色即赛道色;
-  非选中的卡整体降为 80% 不透明——选中线路最亮。
-- **线路图(LineDiagram)**:赛道详情页把该赛道画成一条折线(折角恒 45°),
-  站点 = 头部项目(圆圈大小按 Star),HN 共振成员画双环 = 换乘;
-  远处两条暗线衬托本线最亮。
-- **字模框状态**:增速数字的框——实线 = 实测,虚线 = 估算(配 ≈ 前缀),删除线 = 停运(撤)。
-- **今日首发卡**:替代报眼;猩红角签 + 当日新增 STAR 大数。
-- **hairline seam**:面板间 1px 线分隔,外阴影零使用;站点网格点阵作地纹。
+- 左侧 232px 固定侧边栏:产品标 + 分组导航(观测/我的/系统)+ 设置与主题;≤980px 变抽屉。
+- 顶栏 56px:页面标题 + Agent 运行状态 pill + 最近观测时间 + 立即观测。
+- 内容区 max-width 1240,24px 内边距。KPI 四格 → Agent 卡 → 赛道线网 → 通知 + 快捷入口。
 
-## Charts
+## AI-Native surfaces(Agent 是一等公民)
 
-描边 `currentColor`(容器 color = `var(--accent)`),填充 `var(--accent-soft)`,无渐变;
-同一榜单内所有 sparkline 共享 y 域;详情/赛道大图 y 轴自适应数据区间;轴刻度走 token。
+- **状态 pill**:运行中(蓝,脉冲)/ 空闲 / 成功(绿)/ 失败(红),出现在顶栏、Agent 卡、运行表。
+- **Agent 卡**:最近一轮结果(扫描数、新收录数)、自动观测节奏、立即观测主按钮。
+- **Agent 动态页**:`/api/runs` 真实运行记录表(状态/耗时/扫描/新增/产出)+ `/api/notifications` 分发流。
+- 数据全部来自真实管线(fetch_runs / notifications 表),无任何装饰性假状态。
 
-## Motion
+## Components
 
-一个签名时刻:线段卡与榜单的错峰入场(30ms 步进,上限 0.5s);线路图静态呈现。
-`prefers-reduced-motion` 下全部动画归零。
-
-## Surfaces & themes
-
-暗主题 = 午夜珐琅墙面,明主题 = 白天的口袋地图。切换经 `data-theme` 持久化。
-圆角纪律:控件 2px,面板方形,不用胶囊。
+白卡 + 1px 边框 + 8px 圆角;控件 6px;状态徽章 999px 胶囊。
+语义徽章:黑马 = 橙、共振 = 蓝、新 = 蓝软底、降温/营销嫌疑 = 灰虚线。
+增速数字:绿色 tabular,估算加 ≈(虚线框纪律已简化为前缀 + tooltip)。
+删除/取消关注一律走确认弹窗;榜单支持排序(综合/Star/名称)与加载更多。
 
 ## Bans in force
 
-渐变文字、眉题(eyebrow)、零偏移彩色光晕、彩色 border-left、幽灵卡、
-图表渐变填充、mono 用于非数据文本、把线网图当布局用(它只是签名动作)。
+大面积渐变、霓虹色、紫色 AI 风、默认深色页面、玻璃拟态、无意义装饰图标、
+独立边框滥用、渐变文字、眉题、零偏移光晕。

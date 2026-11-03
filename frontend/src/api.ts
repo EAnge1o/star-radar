@@ -1,5 +1,6 @@
 import type {
   BoardResp,
+  FetchRun,
   Notification,
   Report,
   Repo,
@@ -54,6 +55,11 @@ export const api = {
   trackView: (label: string) =>
     getJSON<TrackPageData>(`/api/tracks/view?label=${encodeURIComponent(label)}`),
   stats: () => getJSON<Stats>("/api/stats"),
+  runs: (limit = 20) => getJSON<{ runs: FetchRun[] }>(`/api/runs?limit=${limit}`),
+  agentStatus: () =>
+    getJSON<{ running: boolean; last_run: FetchRun | null; interval_hours: number; llm_ready: boolean; github_token: boolean }>(
+      "/api/agent/status"
+    ),
   repo: (fullName: string) => getJSON<RepoDetail>(`/api/repos/${fullName}`),
   refresh: () => postJSON<{ ok: boolean; repos: number; new: number }>("/api/refresh"),
 

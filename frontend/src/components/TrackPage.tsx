@@ -39,7 +39,7 @@ function LineDiagram({ label, members }: { label: string; members: Repo[] }) {
   return (
     <div className="detail-chart" style={{ padding: "18px 12px 6px", overflowX: "auto" }}>
       <div className="label">
-        线路图 · 圆点为头部项目,大小按 Star;双环为 HN 换乘;折角恒 45°
+        赛道图谱 · 圆点为头部项目(大小按 Star),双环为 HN 共振
       </div>
       <svg viewBox="0 0 1060 120" style={{ width: "100%", minWidth: 720, display: "block" }} role="img"
         aria-label={`${label} 线路图`}>
@@ -133,7 +133,7 @@ export default function TrackPage({ label, onBack, onOpen, watched, onWatch }: P
             {track.summary || "—"}
           </p>
           <span className="section-sub" style={{ fontFamily: "var(--font-mono)" }}>
-            TRACK · {track.size} 个项目 · 热度 {(track.heat * 100).toFixed(0)} · 聚类方式 {track.method === "llm-embed" ? "语义聚类" : "主题词典"}
+            {track.size} 个项目 · 热度 {(track.heat * 100).toFixed(0)} · 聚类方式 {track.method === "llm-embed" ? "语义聚类" : "主题词典"}
           </span>
         </div>
       </div>
@@ -142,13 +142,13 @@ export default function TrackPage({ label, onBack, onOpen, watched, onWatch }: P
 
       {hist.length > 1 && (
         <div className="detail-chart">
-          <div className="label">线路热度曲线(组内近 7 日 Star 占比,%)</div>
+          <div className="label">赛道热度曲线(组内近 7 日 Star 占比,%)</div>
           <TrendChart data={hist} height={170} domainPad={3} />
         </div>
       )}
 
       <div className="section-head" style={{ marginTop: 26 }}>
-        <h2 className="section-title" style={{ fontSize: 16 }}>沿线站点</h2>
+        <h2 className="section-title" style={{ fontSize: 16 }}>成员榜单</h2>
         <span className="section-sub">{members.length} 个项目 · 按综合增速排序</span>
       </div>
       <div className="repo-list">

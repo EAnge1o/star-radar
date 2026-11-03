@@ -135,6 +135,16 @@ export interface Notification {
   created_at: string;
 }
 
+export interface FetchRun {
+  id: number;
+  started_at: string;
+  finished_at: string | null;
+  status: string;
+  note: string | null;
+  repos_seen: number;
+  repos_new: number;
+}
+
 export interface Stats {
   total_repos: number;
   today_new_stars: number;

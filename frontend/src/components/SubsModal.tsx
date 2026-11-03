@@ -7,6 +7,7 @@ interface Props {
   onClose: () => void;
   onChange: () => void;
   notify: (msg: string) => void;
+  confirm: (s: { title: string; body: string; danger?: boolean; confirmText?: string; action: () => void }) => void;
 }
 
 const EXAMPLES = [
@@ -15,7 +16,7 @@ const EXAMPLES = [
   { name: "Agent 框架", query: "topic:ai-agents stars:>500" },
 ];
 
-export default function SubsModal({ onClose, onChange, notify }: Props) {
+export default function SubsModal({ onClose, onChange, notify, confirm }: Props) {
   const [subs, setSubs] = useState<Sub[]>([]);
   const [name, setName] = useState("");
   const [query, setQuery] = useState("");
@@ -48,11 +49,19 @@ export default function SubsModal({ onClose, onChange, notify }: Props) {
     }
   };
 
-  const remove = async (s: Sub) => {
-    await api.subs.remove(s.id);
-    notify(`已删除订阅「${s.name}」`);
-    load();
-    onChange();
+  const remove = (s: Sub) => {
+    confirm({
+      title: "删除订阅?",
+      body: `「${s.name}」的页签与历史结果将一并移除。`,
+      danger: true,
+      confirmText: "删除",
+      action: async () => {
+        await api.subs.remove(s.id);
+        notify(`已删除订阅「${s.name}」`);
+        load();
+        onChange();
+      },
+    });
   };
 
   return (

@@ -9,9 +9,10 @@ interface Props {
   onOpen: (r: Repo) => void;
   onWatchChange: () => void;
   notify: (msg: string) => void;
+  confirm: (s: { title: string; body: string; danger?: boolean; confirmText?: string; action: () => void }) => void;
 }
 
-export default function WatchlistPage({ onOpen, onWatchChange, notify }: Props) {
+export default function WatchlistPage({ onOpen, onWatchChange, notify, confirm }: Props) {
   const [repos, setRepos] = useState<Repo[] | null>(null);
   const [notifications, setNotifications] = useState<import("../types").Notification[]>([]);
 
@@ -21,11 +22,19 @@ export default function WatchlistPage({ onOpen, onWatchChange, notify }: Props) 
   };
   useEffect(load, []);
 
-  const unwatch = async (r: Repo) => {
-    await api.watch.remove(r.gh_id);
-    notify(`已取消关注 ${r.full_name}`);
-    load();
-    onWatchChange();
+  const unwatch = (r: Repo) => {
+    confirm({
+      title: "取消关注?",
+      body: `将不再推送 ${r.full_name} 的里程碑与暴增通知。`,
+      danger: true,
+      confirmText: "取消关注",
+      action: async () => {
+        await api.watch.remove(r.gh_id);
+        notify(`已取消关注 ${r.full_name}`);
+        load();
+        onWatchChange();
+      },
+    });
   };
 
   const askDesktop = async () => {
@@ -36,9 +45,9 @@ export default function WatchlistPage({ onOpen, onWatchChange, notify }: Props) 
 
   return (
     <div className="page wrap">
-      <div className="section-head">
-        <h2 className="section-title">Watchlist · 盯榜</h2>
-        <span className="section-sub">里程碑(破 1k/5k/10k…)与单日暴增会推送;通道在设置里配置</span>
+      <div className="page-head">
+        <h1>Watchlist</h1>
+        <p className="sub">里程碑(破 1k / 5k / 10k…)与单日暴增会推送到已配置的通道;桌面通知点右上角开启。</p>
         <button className="btn ghost" style={{ marginLeft: "auto" }} onClick={askDesktop}>
           <Bell size={13} /> 开启桌面通知
         </button>
